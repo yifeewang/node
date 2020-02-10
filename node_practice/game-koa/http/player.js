@@ -24,7 +24,7 @@ http.createServer(function (request, response) {
         const query = queryString.parse(parseUrl.query)
         const playerAction = query.action
 
-        if (playerWon > 4 || sameTimes === 9) {
+        if (playerWon > 4 && sameTimes === 9) {
             response.writeHead(400)
             response.end('我再也不和你玩了')
             return

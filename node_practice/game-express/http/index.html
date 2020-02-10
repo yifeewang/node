@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>石头剪刀布游戏</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #content {
+            height: 400px;
+            width: 600px;
+            border: 1px solid black;
+        }
+        #box {
+            display: flex;
+            flex-direction: row;
+        }
+        button {
+            width: 40px;
+            height: 40px;
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="content"></div>
+    <div id="box">
+        <button id="rock">石头</button>
+        <button id="scissor">剪刀</button>
+        <button id="paper">布</button>
+    </div>
+</body>
+<script>
+    const $button = {
+        rock: document.getElementById('rock'),
+        scissor: document.getElementById('scissor'),
+        paper: document.getElementById('paper')
+    }
+    const $output = document.getElementById('content')
+
+    Object.keys($button).forEach( key => {
+        $button[key].addEventListener('click', function(){
+            fetch(`http://${location.host}/game?action=${key}`)
+                .then( res => {
+                    return res.text()
+                })
+                .then( text => {
+                    $output.innerText = text
+                })
+        })
+    })
+</script>
+</html>
